@@ -59,6 +59,7 @@ jobs:
           name: Post Test Results to GitHub
           command: bundle exec danger || echo "danger failed"
           when: always # Run this even when tests fail
+
   "Execute tests on Ubuntu":
     environment:
       CIRCLE_TEST_REPORTS: ~/test-reports
@@ -106,7 +107,7 @@ jobs:
           command: bundle exec danger || echo "danger failed"
           when: always # Run this even when tests fail
 
-  "Validate Documentation":
+  "Validate documentation generation":
     docker:
       - image: circleci/ruby:2.3
     steps:
@@ -128,7 +129,7 @@ jobs:
       - store_artifacts:
           path: /tmp/validated_docs
 
-  "Lint Source Code":
+  "Lint source code":
     docker:
       - image: circleci/ruby:2.3
     steps:
@@ -153,5 +154,5 @@ workflows:
     jobs:
       - "Execute tests on macOS"
       - "Execute tests on Ubuntu"
-      - "Validate Documentation"
-      - "Lint Source Code"
+      - "Validate documentation generation"
+      - "Lint source code"
