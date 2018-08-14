@@ -107,7 +107,7 @@ jobs:
           command: bundle exec danger || echo "danger failed"
           when: always # Run this even when tests fail
 
-  "Validate documentation generation":
+  "Validate docs generation":
     environment:
       FASTLANE_DOCS_CLONE_PATH: /tmp/validated_docs
     docker:
@@ -156,5 +156,5 @@ workflows:
     jobs:
       - "Execute tests on macOS"
       - "Execute tests on Ubuntu"
-      - "Validate documentation generation"
+      - "Validate docs generation"
       - "Lint source code"
