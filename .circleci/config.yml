@@ -108,6 +108,8 @@ jobs:
           when: always # Run this even when tests fail
 
   "Validate documentation generation":
+    environment:
+      FASTLANE_DOCS_CLONE_PATH: /tmp/validated_docs
     docker:
       - image: circleci/ruby:2.3
     steps:

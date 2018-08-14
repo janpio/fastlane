@@ -316,7 +316,7 @@ end
 desc "Validates the docs still are good"
 lane :validate_docs do
   # Test if generating the docs is successful
-  clone_docs(debug: false, target_dir: "/tmp/validated_docs") do
+  clone_docs do
     generate_markdown_docs(target_path: ".")
   end
 
@@ -406,7 +406,7 @@ lane :update_docs do |options|
   end
 end
 
-def clone_docs(debug: false, target_dir: nil)
+def clone_docs(debug: false)
   if debug
     clone_url = ENV['FASTLANE_DOCS_CLONE_URL'] || "../../docs"
 
@@ -416,6 +416,7 @@ def clone_docs(debug: false, target_dir: nil)
   else
     git_url = ENV['FASTLANE_DOCS_GIT_URL'] || "https://github.com/fastlane/docs"
 
+    target_dir = ENV['FASTLANE_DOCS_CLONE_PATH']
     if target_dir.nil?
       require 'tmpdir'
       target_dir = Dir.mktmpdir("fl_clone")
