@@ -319,6 +319,7 @@ lane :validate_docs do
     # Test if generating the docs is successful
     generate_markdown_docs(target_path: ".")
     # Verify docs tests are still passing
+    sh("pwd")
     run_docs_tests
   end
 end
