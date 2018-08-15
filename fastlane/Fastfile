@@ -489,6 +489,7 @@ private_lane :ensure_tool_name_formatting do
         errors << "Use _#{tool}_ instead of `#{tool}` to mention a tool in the docs in '#{path}'" if content.include?("`#{tool}`")
         errors << "Use _#{tool}_ instead of `_#{tool}_` to mention a tool in the docs in '#{path}'" if content.include?("`_#{tool}_`")
         errors << "Use [_#{tool}_] instead of [#{tool}] to mention a tool in the docs in '#{path}'" if content.include?("[#{tool}]")
+        errors << "Use <em>#{tool}<em> instead of <code>#{tool}</code> to mention a tool in the docs in '#{path}'" if content.include?("<code>#{tool}</code>")
         if content.include?("_#{tool.to_s.capitalize}_") || content.include?("`#{tool.to_s.capitalize}`")
           errors << "fastlane tools have to be formatted in lower case: #{tool} in '#{path}'"
         end
@@ -510,7 +511,7 @@ private_lane :ensure_code_samples do
     all_content += "\n```"
   end
   test_sample_code(content: all_content) # to not have to call the action 200 times
-  UI.success("✅  All fastlane action code samples work as expected")
+  UI.success("✅  All fastlane action code samples (from #{ActionsList.all_actions.length} actions) work as expected")
 end
 
 # Run the other code samples, yo
