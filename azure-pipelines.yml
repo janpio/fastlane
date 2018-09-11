@@ -15,7 +15,9 @@ jobs:
       SET FASTLANE_ITUNES_TRANSPORTER_PATH
     displayName: 'set ENV variables'
 
-  - script: bundle exec fastlane execute_tests
+  - script: |
+      SET FASTLANE_ITUNES_TRANSPORTER_PATH="C:/tmp"
+      bundle exec fastlane execute_tests
     displayName: 'bundle exec fastlane execute_tests'
 
 - job: macOS
