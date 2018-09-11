@@ -24,10 +24,6 @@ jobs:
   pool:
     vmImage: xcode9-macos10.13
   steps:
-  - task: UseRubyVersion@0
-    inputs:
-      versionSpec: '>= 2.3'
-
   - script: |
       gem install bundler
       bundle install --retry=3 --jobs=4
