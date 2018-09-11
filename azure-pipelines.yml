@@ -74,8 +74,8 @@ jobs:
 
   - script: |
       export FASTLANE_ITUNES_TRANSPORTER_PATH="/tmp"
-      bundle exec fastlane execute_tests
       export CIRCLE_TEST_REPORTS="/tmp"
+      bundle exec fastlane execute_tests
     displayName: 'bundle exec fastlane execute_tests'
 
   - task: PublishTestResults@2
