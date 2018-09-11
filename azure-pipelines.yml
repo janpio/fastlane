@@ -18,7 +18,7 @@ jobs:
 
   - task: PublishTestResults@2
     inputs:
-      testResultsFiles: '**/test-*.xml'
+      testResultsFiles: '**/*-junit-results.xml'
       testRunTitle: 'Ruby tests'
 
 - job: macOS
@@ -41,7 +41,7 @@ jobs:
 
   - task: PublishTestResults@2
     inputs:
-      testResultsFiles: '**/test-*.xml'
+      testResultsFiles: '**/*-junit-results.xml'
       testRunTitle: 'Ruby tests'
 
 - job: Linux
@@ -80,5 +80,5 @@ jobs:
 
   - task: PublishTestResults@2
     inputs:
-      testResultsFiles: '**/test-*.xml'
+      testResultsFiles: '**/*-junit-results.xml'
       testRunTitle: 'Ruby tests'
