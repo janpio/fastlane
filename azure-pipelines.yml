@@ -63,7 +63,9 @@ jobs:
         && ./autogen.sh --noconfigure \
         && ./configure \
         && make
-    displayName: 'install xar' 
+        && sudo make install
+    displayName: 'install xar'
+  - script: xar -v
 
   - script: bundle exec fastlane execute_tests
     displayName: 'bundle exec fastlane execute_tests'
