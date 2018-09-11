@@ -33,7 +33,7 @@ jobs:
   - script: |
       export FASTLANE_ITUNES_TRANSPORTER_PATH="/tmp"
       echo $FASTLANE_ITUNES_TRANSPORTER_PATH
-      export CIRCLE_TEST_REPORTS="/tmp" 
+      export CIRCLE_TEST_REPORTS="$AGENT_BUILDDIRECTORY" 
     displayName: 'set ENV variables'
 
   - script: bundle exec fastlane execute_tests
