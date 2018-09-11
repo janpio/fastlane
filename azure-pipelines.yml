@@ -16,5 +16,10 @@ steps:
     bundle install --retry=3 --jobs=4
   displayName: 'bundle install'
 
+- script: |
+    SET FASTLANE_ITUNES_TRANSPORTER_PATH="C:/tmp"
+    SET FASTLANE_ITUNES_TRANSPORTER_PATH
+  displayName: 'set ENV variables'
+    
 - script: bundle exec fastlane execute_tests
   displayName: 'bundle exec fastlane execute_tests'
