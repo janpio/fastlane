@@ -65,7 +65,8 @@ jobs:
         && make \
         && sudo make install
     displayName: 'install xar'
-  - script: xar -v
+  - script: xar --help
+    displayName: 'xar --help'
 
   - script: bundle exec fastlane execute_tests
     displayName: 'bundle exec fastlane execute_tests'
