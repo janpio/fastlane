@@ -1,25 +1,64 @@
-# Ruby
-# Package your Ruby application.
-# Add steps that install rails, analyze code, save build artifacts, deploy, and more:
-# https://docs.microsoft.com/vsts/pipelines/languages/ruby
+jobs:
+- job: Windows
+  pool:
+    vmImage: vs2017-win2016
+  steps:
+  - task: UseRubyVersion@0
+    inputs:
+      versionSpec: '>= 2.5'
 
-pool:
-  vmImage: 'Ubuntu 16.04'
+  - script: |
+      gem install bundler
+      bundle install --retry=3 --jobs=4
+    displayName: 'bundle install'
 
-steps:
-- task: UseRubyVersion@0
-  inputs:
-    versionSpec: '>= 2.5'
+  - script: |
+      export FASTLANE_ITUNES_TRANSPORTER_PATH="/tmp"
+      echo $FASTLANE_ITUNES_TRANSPORTER_PATH
+    displayName: 'set ENV variables'
 
-- script: |
-    gem install bundler
-    bundle install --retry=3 --jobs=4
-  displayName: 'bundle install'
+  - script: bundle exec fastlane execute_tests
+    displayName: 'bundle exec fastlane execute_tests'
 
-- script: |
-    export FASTLANE_ITUNES_TRANSPORTER_PATH="/tmp"
-    echo $FASTLANE_ITUNES_TRANSPORTER_PATH
-  displayName: 'set ENV variables'
-    
-- script: bundle exec fastlane execute_tests
-  displayName: 'bundle exec fastlane execute_tests'
+- job: macOS
+  pool:
+    vmImage: xcode9-macos10.13
+  steps:
+  - task: UseRubyVersion@0
+    inputs:
+      versionSpec: '>= 2.5'
+
+  - script: |
+      gem install bundler
+      bundle install --retry=3 --jobs=4
+    displayName: 'bundle install'
+
+  - script: |
+      export FASTLANE_ITUNES_TRANSPORTER_PATH="/tmp"
+      echo $FASTLANE_ITUNES_TRANSPORTER_PATH
+    displayName: 'set ENV variables'
+
+  - script: bundle exec fastlane execute_tests
+    displayName: 'bundle exec fastlane execute_tests'
+  
+- job: Linux
+  pool:
+    vmImage: ubuntu-16.04
+  steps:
+  - task: UseRubyVersion@0
+    inputs:
+      versionSpec: '>= 2.5'
+
+  - script: |
+      gem install bundler
+      bundle install --retry=3 --jobs=4
+    displayName: 'bundle install'
+
+  - script: |
+      export FASTLANE_ITUNES_TRANSPORTER_PATH="/tmp"
+      echo $FASTLANE_ITUNES_TRANSPORTER_PATH
+    displayName: 'set ENV variables'
+
+  - script: bundle exec fastlane execute_tests
+    displayName: 'bundle exec fastlane execute_tests'
+
