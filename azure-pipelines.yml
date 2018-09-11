@@ -62,7 +62,7 @@ jobs:
         && sed -i 's/\[OpenSSL_add_all_ciphers\]/\[OPENSSL_init_crypto\]/g' configure.ac \
         && ./autogen.sh --noconfigure \
         && ./configure \
-        && make
+        && make \
         && sudo make install
     displayName: 'install xar'
   - script: xar -v
