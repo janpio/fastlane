@@ -54,7 +54,7 @@ jobs:
     displayName: 'set ENV variables'
     
   - script: |
-      sudo apt-get install libssl-dev
+      sudo apt-get install libssl1.0-dev
       wget https://github.com/downloads/mackyle/xar/xar-1.6.1.tar.gz
       tar -xzf xar-1.6.1.tar.gz \
         && mv xar-1.6.1 xar \
