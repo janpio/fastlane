@@ -49,7 +49,7 @@ jobs:
     displayName: 'bundle install'
 
   - script: |
-      export FASTLANE_ITUNES_TRANSPORTER_PATH="~"
+      export FASTLANE_ITUNES_TRANSPORTER_PATH="/tmp"
       echo $FASTLANE_ITUNES_TRANSPORTER_PATH
     displayName: 'set ENV variables'
     
