@@ -7,10 +7,8 @@ jobs:
     inputs:
       versionSpec: '>= 2.5'
 
-  - script: |
-      gem install bundler
-      bundle install --retry=3 --jobs=4
-    displayName: 'bundle install'
+  - script: gem install bundler
+  - script: bundle install --retry=3 --jobs=4
 
   - script: |
       SET FASTLANE_ITUNES_TRANSPORTER_PATH="C:/tmp"
@@ -51,7 +49,7 @@ jobs:
     displayName: 'bundle install'
 
   - script: |
-      export FASTLANE_ITUNES_TRANSPORTER_PATH="/tmp"
+      export FASTLANE_ITUNES_TRANSPORTER_PATH="~"
       echo $FASTLANE_ITUNES_TRANSPORTER_PATH
     displayName: 'set ENV variables'
 
