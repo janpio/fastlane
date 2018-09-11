@@ -59,7 +59,7 @@ jobs:
       tar -xzf xar-1.6.1.tar.gz \
         && mv xar-1.6.1 xar \
         && cd xar \
-        && sed -i 's/[OpenSSL_add_all_ciphers]/[OPENSSL_init_crypto]/g' configure.ac \
+        && sed -i 's/\[OpenSSL_add_all_ciphers\]/\[OPENSSL_init_crypto\]/g' configure.ac \
         && ./autogen.sh --noconfigure \
         && ./configure \
         && make 
