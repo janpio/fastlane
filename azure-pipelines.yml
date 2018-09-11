@@ -70,4 +70,3 @@ jobs:
 
   - script: bundle exec fastlane execute_tests
     displayName: 'bundle exec fastlane execute_tests'
-
