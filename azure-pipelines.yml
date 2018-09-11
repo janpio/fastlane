@@ -62,7 +62,9 @@ jobs:
         && sed -i 's/\[OpenSSL_add_all_ciphers\]/\[OPENSSL_init_crypto\]/g' configure.ac \
         && ./autogen.sh --noconfigure \
         && ./configure \
-        && make 
+        && make \
+        && cd .. \
+        && rmdir -r xar
     displayName: 'install xar' 
 
   - script: bundle exec fastlane execute_tests
