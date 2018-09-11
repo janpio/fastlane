@@ -26,7 +26,7 @@ jobs:
   steps:
   - task: UseRubyVersion@0
     inputs:
-      versionSpec: '>= 2.5'
+      versionSpec: '>= 2.3'
 
   - script: |
       gem install bundler
