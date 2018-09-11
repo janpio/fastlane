@@ -13,8 +13,8 @@ jobs:
     displayName: 'bundle install'
 
   - script: |
-      export FASTLANE_ITUNES_TRANSPORTER_PATH="/tmp"
-      echo $FASTLANE_ITUNES_TRANSPORTER_PATH
+      SET FASTLANE_ITUNES_TRANSPORTER_PATH="C:/tmp"
+      SET FASTLANE_ITUNES_TRANSPORTER_PATH
     displayName: 'set ENV variables'
 
   - script: bundle exec fastlane execute_tests
