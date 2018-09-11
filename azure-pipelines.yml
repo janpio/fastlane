@@ -52,6 +52,16 @@ jobs:
       export FASTLANE_ITUNES_TRANSPORTER_PATH="~"
       echo $FASTLANE_ITUNES_TRANSPORTER_PATH
     displayName: 'set ENV variables'
+    
+  - script: |
+      wget https://github.com/downloads/mackyle/xar/xar-1.6.1.tar.gz .
+      tar -xzf xar-1.6.1.tar.gz \
+        && mv xar-1.6.1 xar \
+        && cd xar \
+        && ./autogen.sh --noconfigure \
+        && ./configure \
+        && make 
+    displayName: 'install xar' 
 
   - script: bundle exec fastlane execute_tests
     displayName: 'bundle exec fastlane execute_tests'
