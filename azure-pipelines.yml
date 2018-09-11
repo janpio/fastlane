@@ -12,6 +12,7 @@ jobs:
 
   - script: |
       SET FASTLANE_ITUNES_TRANSPORTER_PATH="C:/tmp"
+      SET CIRCLE_TEST_REPORTS="C:/tmp"
       bundle exec fastlane execute_tests
     displayName: 'bundle exec fastlane execute_tests'
 
