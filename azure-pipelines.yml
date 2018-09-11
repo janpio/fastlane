@@ -20,6 +20,11 @@ jobs:
       bundle exec fastlane execute_tests
     displayName: 'bundle exec fastlane execute_tests'
 
+  - task: PublishTestResults@2
+    inputs:
+      testResultsFiles: '**/test-*.xml'
+      testRunTitle: 'Ruby tests'
+
 - job: macOS
   pool:
     vmImage: xcode9-macos10.13
