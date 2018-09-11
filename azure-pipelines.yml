@@ -36,7 +36,12 @@ jobs:
 
   - script: bundle exec fastlane execute_tests
     displayName: 'bundle exec fastlane execute_tests'
-  
+
+  - task: PublishTestResults@2
+    inputs:
+      testResultsFiles: '**/test-*.xml'
+      testRunTitle: 'Ruby tests'
+
 - job: Linux
   pool:
     vmImage: ubuntu-16.04
@@ -69,3 +74,8 @@ jobs:
       export FASTLANE_ITUNES_TRANSPORTER_PATH="/tmp"
       bundle exec fastlane execute_tests
     displayName: 'bundle exec fastlane execute_tests'
+
+  - task: PublishTestResults@2
+    inputs:
+      testResultsFiles: '**/test-*.xml'
+      testRunTitle: 'Ruby tests'
