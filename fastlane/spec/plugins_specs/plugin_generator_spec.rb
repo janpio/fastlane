@@ -133,8 +133,8 @@ describe Fastlane::PluginGenerator do
 
         all_classes = action_class.all_classes
         expect(all_classes).to contain_exactly(
-          File.expand_path("lib/#{plugin_info.actions_path}/#{plugin_name}_action.rb", File.join(tmp_dir, gem_name)),
-          File.expand_path("lib/#{plugin_info.helper_path}/#{plugin_name}_helper.rb", File.join(tmp_dir, gem_name))
+          File.expand_path("lib/#{plugin_info.actions_path}/#{plugin_name}_action.rb", File.dirname(File.join(tmp_dir, gem_name, 'foo'))),
+          File.expand_path("lib/#{plugin_info.helper_path}/#{plugin_name}_helper.rb", File.dirname(File.join(tmp_dir, gem_name, 'foo')))
         )
 
         # Get the relative paths to require, check that they have already been required.
