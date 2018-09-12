@@ -1,0 +1,84 @@
+jobs:
+- job: Windows
+  pool:
+    vmImage: vs2017-win2016
+  steps:
+  - task: UseRubyVersion@0
+    inputs:
+      versionSpec: '>= 2.5'
+
+  - script: gem install bundler
+  - script: bundle install --retry=3 --jobs=4
+
+  - script: |
+      SET FASTLANE_ITUNES_TRANSPORTER_PATH="C:/tmp"
+      SET CIRCLE_TEST_REPORTS="C:/tmp"
+      bundle exec fastlane execute_tests
+    displayName: 'bundle exec fastlane execute_tests'
+
+  - task: PublishTestResults@2
+    inputs:
+      testResultsFiles: '**/*-junit-results.xml'
+      testRunTitle: 'Ruby tests'
+
+- job: macOS
+  pool:
+    vmImage: xcode9-macos10.13
+  steps:
+  - script: |
+      gem install bundler
+      bundle install --retry=3 --jobs=4
+    displayName: 'bundle install'
+
+  - script: |
+      export FASTLANE_ITUNES_TRANSPORTER_PATH="/tmp"
+      echo $FASTLANE_ITUNES_TRANSPORTER_PATH
+      export CIRCLE_TEST_REPORTS="$AGENT_BUILDDIRECTORY" 
+    displayName: 'set ENV variables'
+
+  - script: bundle exec fastlane execute_tests
+    displayName: 'bundle exec fastlane execute_tests'
+
+  - task: PublishTestResults@2
+    inputs:
+      testResultsFiles: '**/*-junit-results.xml'
+      testRunTitle: 'Ruby tests'
+
+- job: Linux
+  pool:
+    vmImage: ubuntu-16.04
+  steps:
+  - task: UseRubyVersion@0
+    inputs:
+      versionSpec: '>= 2.5'
+
+  - script: |
+      gem install bundler
+      bundle install --retry=3 --jobs=4
+    displayName: 'bundle install'
+    
+  - script: |
+      sudo apt-get install libssl1.0-dev
+      wget https://github.com/downloads/mackyle/xar/xar-1.6.1.tar.gz
+      tar -xzf xar-1.6.1.tar.gz \
+        && mv xar-1.6.1 /tmp/xar \
+        && cd /tmp/xar \
+        && sed -i 's/\[OpenSSL_add_all_ciphers\]/\[OPENSSL_init_crypto\]/g' configure.ac \
+        && ./autogen.sh --noconfigure \
+        && ./configure \
+        && make \
+        && sudo make install
+    displayName: 'install xar'
+  - script: xar --help
+    displayName: 'xar --help'
+
+  - script: |
+      export FASTLANE_ITUNES_TRANSPORTER_PATH="/tmp"
+      export CIRCLE_TEST_REPORTS="/tmp"
+      bundle exec fastlane execute_tests
+    displayName: 'bundle exec fastlane execute_tests'
+
+  - task: PublishTestResults@2
+    inputs:
+      testResultsFiles: '**/*-junit-results.xml'
+      testRunTitle: 'Ruby tests'
